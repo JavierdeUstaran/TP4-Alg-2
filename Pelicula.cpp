@@ -43,7 +43,7 @@ void Pelicula::imprimir_datos(){
 	cout << genero << endl;
 	cout << director << endl;
 	cout << puntuacion << endl;
-	this->actores->listar();
+	this->actores->listar_actores();
 }
 
 

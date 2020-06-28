@@ -18,7 +18,7 @@ Archivo::~Archivo(){
 
 void Archivo::cargar_no_vistas(Lista<Pelicula> &lista_no_vistas){
 
-	string* separado = new string();
+	string* separado = new string;
 	istringstream stream_actores;
 	Lista<string> lista_actores;
 
@@ -37,11 +37,14 @@ void Archivo::cargar_no_vistas(Lista<Pelicula> &lista_no_vistas){
 			while (!stream_actores.eof()){
 
 				stream_actores >> (*separado);
+				cout << *separado <<endl;
 				lista_actores.insertar_dato(separado);
 			}
 
+			lista_actores.listar_actores();
 			Pelicula* pelicula = new Pelicula(titulo, genero, stoi(puntaje), director, &lista_actores);
 
+			pelicula->imprimir_datos();
 			lista_no_vistas.insertar_dato(pelicula);
 
 			if (!archivo_no_vistas.eof()) getline(archivo_no_vistas, titulo);
