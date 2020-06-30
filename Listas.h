@@ -25,7 +25,7 @@ class Lista {
 
 		//Pre: Recibe un dato T
 		//Post: Agrega un nodo a la lista e incrementa en 1 el tamaño de la misma
-		void insertar_dato(T* dato_nuevo);
+		void insertar_dato(T &dato_nuevo);
 
 		//Pre: Debe existir el nodo en la posicion pos
 		//Post: Devuelve el nodo en dicha posicion de la lista.
@@ -57,7 +57,7 @@ Lista<T>::Lista(){
 }
 
 template<class T>
-void Lista<T>::insertar_dato(T* dato_nuevo){
+void Lista<T>::insertar_dato(T &dato_nuevo){
 
 	Nodo<T>* nuevo_nodo = new Nodo<T>(dato_nuevo);
 
@@ -101,25 +101,35 @@ Lista<T>::~Lista(){
 
 template<class T>
 void Lista<T>::eliminar_dato(unsigned pos){
+
 	Nodo<T>* aux = primero;
-	if(pos == 1 || !(primero->obtener_siguiente())){
-		primero = aux->obtener_siguiente();
+
+	if(pos == 1){
+
+		primero = primero->obtener_siguiente();
+
 	} else {
 		unsigned i = 1;
 		Nodo<T>* anterior;
-		while(i < pos && aux->obtener_siguiente()){
+
+		while(i < pos){
+
 			anterior = aux;
 			aux = aux->obtener_siguiente();
 			i++;
-		} anterior->establecer_siguiente(aux->obtener_siguiente());
-	} delete aux;
+		}
+
+		anterior->establecer_siguiente(aux->obtener_siguiente());
+	}
+
+	delete aux;
 	tam --;
 }
 
 template<class T>
 void Lista<T>::listar(){
 	Nodo<T>* aux = primero;
-	T* dato_aux;
+	T dato_aux;
 	if(this->lista_vacia()){
 		cout << "La lista esta vacia" << endl;
 	} else {
@@ -135,7 +145,7 @@ template<class T>
 void Lista<T>::listar_actores(){
 
 	Nodo<T>* aux = primero;
-	string* actor;
+	string actor;
 
 	if(this->lista_vacia()){
 
@@ -146,7 +156,7 @@ void Lista<T>::listar_actores(){
 		while(aux != NULL){
 
 			actor = aux->obtener_dato();
-			cout << "\nACTOR: " << *actor << endl;
+			cout << "\nACTOR: " << actor << endl;
 			aux = aux->obtener_siguiente();
 		}
 	}
